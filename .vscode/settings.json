@@ -51,7 +51,7 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Connect The Pops.sln",
+    "dotnet.defaultSolution": "ConnectThePopsRemake.sln",
     "cmake.configureOnOpen": true,
     "cmake.sourceDirectory": "C:/Users/kitso/Connect The Pops/Library/PackageCache/com.unity.ide.visualstudio@2.0.22/Editor/COMIntegration/COMIntegration~"
 }

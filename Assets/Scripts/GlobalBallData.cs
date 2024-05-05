@@ -37,4 +37,9 @@ public class GlobalBallData : MonoBehaviour
     {
         return GetBallByValue(value).Color;
     }
+
+    public Sprite GetSpriteByValue(int value)
+    {
+        return GetBallByValue(value).sprite;
+    }
 }

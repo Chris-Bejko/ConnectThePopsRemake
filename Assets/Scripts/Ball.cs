@@ -10,6 +10,9 @@ public class Ball : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField]
+    private Image[] images;
+
+    [SerializeField]
     private bool IsPreviewBall;
     [SerializeField]
     private Image image, innerImage, ring;
@@ -78,6 +81,12 @@ public class Ball : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (ballData.Value <= 0)
             return;
 
+        if(ballData.Value <= 1024)
+        {
+            valueText.gameObject.SetActive(false);
+            return;
+        }
+        valueText.gameObject.SetActive(true);
         var exponent = ballData.Value.FloorPower2().GetExponentBase2();
         var lastDigit = int.Parse(exponent.ToString()[^1].ToString());
         valueText.text = Mathf.Pow(2, lastDigit).ToString();
@@ -98,9 +107,11 @@ public class Ball : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void SetColor()
     {
-        ring.gameObject.SetActive(ballData.Value >= 1000);
-        image.color = GlobalBallData.Instance.GetColorByValue(ballData.Value.FloorPower2());
-        innerImage.color = GlobalBallData.Instance.GetColorByValue(ballData.Value.FloorPower2());
+        ring.gameObject.SetActive(ballData.Value >= 1025);
+        image.sprite = GlobalBallData.Instance.GetSpriteByValue(ballData.Value.FloorPower2());
+        // image.color = GlobalBallData.Instance.GetColorByValue(ballData.Value.FloorPower2());
+        // innerImage.color = GlobalBallData.Instance.GetColorByValue(ballData.Value.FloorPower2());
+        innerImage.sprite = GlobalBallData.Instance.GetSpriteByValue(ballData.Value.FloorPower2());
     }
     public async Task OnGridChanged()
     {
@@ -295,6 +306,8 @@ public class BallData
     public BallTransform BallTransform;
 
     public Color Color;
+
+    public Sprite sprite;
 
 }
 
